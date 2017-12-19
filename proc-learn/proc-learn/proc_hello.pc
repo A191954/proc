@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "sqlca.h"
+
+
+//ÑÝÊ¾helloworld 
+
+EXEC SQL BEGIN DECLARE SECTION;
+	char *pid = "c##scott/tiger";
+EXEC SQL END DECLARE SECTION;
+
+int main()
+{
+	int  	ret  = 0;
+	
+	EXEC SQL CONNECT :pid ;
+	if (sqlca.sqlcode != 0)
+	{
+		ret = sqlca.sqlcode;
+		printf("connect err:%d ", ret);
+		return ret;
+	}
+	printf("connect...ok.\n");
+	
+	return  ret;
+}

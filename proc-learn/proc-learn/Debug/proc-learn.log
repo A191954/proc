@@ -1,0 +1,4 @@
+﻿  proc_hello.c
+proc_hello.obj : error LNK2019: 无法解析的外部符号 _sqlcxt，该符号在函数 _main 中被引用
+..\..\orasql12.lib : warning LNK4272: 库计算机类型“x64”与目标计算机类型“X86”冲突
+D:\git\proc\proc-learn\Debug\proc-learn.exe : fatal error LNK1120: 1 个无法解析的外部命令

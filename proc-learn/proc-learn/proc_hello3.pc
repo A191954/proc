@@ -1,0 +1,39 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include  <string.h>
+#include <stdlib.h>
+
+#include "sqlca.h"
+
+
+
+//先定义宿主变量 (SQL变量)
+EXEC SQL BEGIN  DECLARE SECTION ;
+	char *serverid = "scott/tiger@orcl";
+EXEC SQL END  DECLARE SECTION ;
+
+int main()
+{
+	int	ret = 0;
+	
+	
+	printf("hello....\n请输入用户密码:");
+	scanf("%s", serverid);
+	
+	
+	EXEC SQL connect :serverid;
+	if (sqlca.sqlcode != 0)
+	{
+		ret = sqlca.sqlcode ;
+		printf("connect err:%d \n", ret);
+		return ret;
+	}
+	else
+	{
+		printf("connect ok\n");
+	}
+	
+	EXEC SQL COMMIT RELEASE; //提交事务断开连接
+	return ret;	
+}
+

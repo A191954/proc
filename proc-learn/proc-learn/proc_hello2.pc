@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#include "sqlca.h"
+
+
+//先定义宿主变量 (SQL变量)
+EXEC SQL BEGIN  DECLARE SECTION ;
+	char *serverid = "c##scott/tiger@orcl";
+EXEC SQL END  DECLARE SECTION ;
+
+int main()
+{
+	int	ret = 0;
+	printf("hello....\n");
+	
+	printf("serverid:%s \n", serverid);
+	
+	EXEC SQL connect :serverid;
+	if (sqlca.sqlcode != 0)
+	{
+		ret = sqlca.sqlcode ;
+		printf("connect err:%d \n", ret);
+		return ret;
+	}
+	else
+	{
+		printf("connect ok\n");
+	}
+	
+	EXEC SQL COMMIT RELEASE; //提交事务断开连接
+	return ret;	
+}
+
