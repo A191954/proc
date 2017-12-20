@@ -142,17 +142,17 @@ static const short sqlcud0[] =
 
 #define _CRT_SECURE_NO_DEPRECATE
 #include <stdio.h>
-#include  <string.h>
+#include <string.h>
 #include <stdlib.h>
 
 #include "sqlca.h"
 
 
 
-//先定义宿主变量 (SQL变量)
+
 /* EXEC SQL BEGIN  DECLARE SECTION ; */ 
 
-	char *serverid = "scott/tiger@orcl";
+	char serverid[20];
 /* EXEC SQL END  DECLARE SECTION ; */ 
 
 
@@ -161,8 +161,8 @@ int main()
 	int	ret = 0;
 	
 	
-	printf("hello....\n请输入用户密码:");
-	scanf("%s", &serverid);
+	printf("hello....\n请输入用户密码(用户名和密码用'/'分开):");
+	scanf("%s", serverid);
 	
 	
 	/* EXEC SQL connect :serverid; */ 
@@ -180,8 +180,8 @@ int main()
  sqlstm.sqlety = (unsigned short)4352;
  sqlstm.occurs = (unsigned int  )0;
  sqlstm.sqhstv[0] = (         void  *)serverid;
- sqlstm.sqhstl[0] = (unsigned int  )0;
- sqlstm.sqhsts[0] = (         int  )0;
+ sqlstm.sqhstl[0] = (unsigned int  )20;
+ sqlstm.sqhsts[0] = (         int  )20;
  sqlstm.sqindv[0] = (         void  *)0;
  sqlstm.sqinds[0] = (         int  )0;
  sqlstm.sqharm[0] = (unsigned int  )0;
